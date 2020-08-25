@@ -14,7 +14,7 @@ def zero_division_handling(func):
 
 class Author(models.Model):
 	"""
-		
+		Model storing information about the authors of books.
 	"""
 
 	name 			= models.CharField(max_length=100, unique=True)
@@ -29,7 +29,9 @@ class Author(models.Model):
 
 class Book(models.Model):
 	"""
-
+		Model containing informations about books.
+		Model is related Author model (ForeignKey) and
+		has reverse relation with Opinions model (M2M). 
 	"""
 
 	title 			= models.CharField(max_length=100) 
@@ -60,7 +62,8 @@ class Book(models.Model):
 
 class Opinion(models.Model):
 	"""
-
+		Model is containg information about books opinions. 
+		Many Opinion objects might be related with one Books object.
 	"""
 	description 	= models.CharField(max_length=500)
 	rating 			= models.IntegerField(validators=[ratings_validator,], default=None)
