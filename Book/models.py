@@ -14,7 +14,8 @@ def zero_division_handling(func):
 
 class Author(models.Model):
 	"""
-		Model storing information about the authors of books.
+		Model storing information about authors of books.
+		One author might be connected with many books.
 	"""
 
 	name 			= models.CharField(max_length=100, unique=True)
@@ -51,11 +52,7 @@ class Book(models.Model):
 			total_rates += op.rating
 		total_rates = round(total_rates/ book.opinions.all().count(), 1)
 		return total_rates
-
-	def print_whole(self):
-		for i in Book.objects.all():
-			print(i.title)
-		return None
+	
 
 	class Meta:
 		ordering = ["pk"]
@@ -74,8 +71,7 @@ class Opinion(models.Model):
 
 	@property   
 	def book_isbn(self):
-		book = Book.objects.get(pk=self.pk)
-		return book.ISBN
+		return self.book.ISBN
 
 	class Meta:
 		ordering = ["book"]
