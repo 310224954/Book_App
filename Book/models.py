@@ -12,6 +12,7 @@ def zero_division_handling(func):
 			return "--"
 	return wrapper_function
 
+
 class Author(models.Model):
 	"""
 		Model storing information about authors of books.
@@ -51,11 +52,11 @@ class Book(models.Model):
 		for op in book.opinions.all():
 			total_rates += op.rating
 		total_rates = round(total_rates/ book.opinions.all().count(), 1)
-		return total_rates
-	
+		return total_rates	
 
 	class Meta:
 		ordering = ["pk"]
+
 
 class Opinion(models.Model):
 	"""
@@ -70,7 +71,7 @@ class Opinion(models.Model):
 		return f"{self.book.ISBN}- {self.rating}"		
 
 	@property   
-	def book_isbn(self):
+	def ISBN(self):
 		return self.book.ISBN
 
 	class Meta:
