@@ -5,7 +5,6 @@ class TestModels(TestCase):
 	"""
 		Test class preapred for testing models and relations between them. 
 	"""
-
 	def setUp(self):
 		self.author_1 		= Author.objects.create(name="Jan Kowalski")
 		self.author_2 		= Author.objects.create(name="John Smith")
@@ -33,7 +32,6 @@ class TestModels(TestCase):
 								rating=5,
 								book=self.book_1,
 								)
-
 
 	def test_author_model(self):
 		self.assertEqual(self.author_1.name, "jan kowalski")

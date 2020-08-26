@@ -11,11 +11,16 @@ class TestCommand(TestCase):
 		Test requires preparing two input files and placing them
 		in 'files' folder inside test directory
 	"""
-
 	def __init__(self, *args, **kwargs):
 		#getting constants => file paths for test input files		
-		self.books_test_file_path 		= __file__.replace("test_commands.py", r"files\ksiazki.txt")
-		self.opinions_test_file_path 	= __file__.replace("test_commands.py", r"files\opinie.txt")
+		self.books_test_file_path 		= __file__.replace(
+											"test_commands.py", 
+											r"files\ksiazki.txt"
+										)
+		self.opinions_test_file_path 	= __file__.replace(
+											"test_commands.py", 
+											r"files\opinie.txt"
+										)
 		super(TestCommand, self).__init__(*args, **kwargs)
 
 	def setUp(self):
@@ -35,6 +40,3 @@ class TestCommand(TestCase):
 		self.assertEqual(Opinion.objects.filter(book=self.book_1).count(), 4)
 		self.assertEqual(self.opinion.ISBN, "9788366436572")
 		self.assertEqual(self.opinion.description, "test1")
-
-
-

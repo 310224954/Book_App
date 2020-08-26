@@ -8,13 +8,12 @@ class Command(BaseCommand):
 
 	def add_arguments(self, parser):
 		parser.add_argument("path", type=str, help="file path")
-		# parser.add_argument('--model_name', type=str, help="model name")
 
 	def handle(self, *args, **options):
 		file_path = options["path"]
 		with open(file_path, "r", encoding="UTF-8") as csv_file:
 			reader = csv.reader(csv_file, delimiter=';')
-			next(reader)
+			next(reader) #skipping headers
 			for line in reader:
 				book = Book.objects.get(ISBN=line[0])
 				new_opinion = Opinion(
@@ -23,3 +22,4 @@ class Command(BaseCommand):
 							book=book
 					)
 				new_opinion.save()
+				

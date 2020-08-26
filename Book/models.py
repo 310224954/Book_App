@@ -18,7 +18,6 @@ class Author(models.Model):
 		Model storing information about authors of books.
 		One author might be connected with many books.
 	"""
-
 	name 			= models.CharField(max_length=100, unique=True)
 
 	def __str__(self):
@@ -35,11 +34,14 @@ class Book(models.Model):
 		Model is related Author model (ForeignKey) and
 		has reverse relation with Opinions model (M2M). 
 	"""
-
 	title 			= models.CharField(max_length=100) 
 	genre 			= models.CharField(max_length=30)
 	ISBN 			= ISBNField(unique=True)
-	author 			= models.ForeignKey(Author ,on_delete=models.SET_NULL, null=True, default=None) 
+	author 			= models.ForeignKey(
+						Author, 
+						on_delete=models.SET_NULL, 
+						null=True, default=None
+					) 
 
 	def __str__(self):
 		return f"{self.title}- {self.ISBN}"
@@ -64,8 +66,16 @@ class Opinion(models.Model):
 		Many Opinion objects might be related with one Books object.
 	"""
 	description 	= models.CharField(max_length=500)
-	rating 			= models.IntegerField(validators=[ratings_validator,], default=None)
-	book 			= models.ForeignKey(Book, on_delete=models.CASCADE, default=None, related_name="opinions")
+	rating 			= models.IntegerField(
+						validators=[ratings_validator,], 
+						default=None
+					)
+	book 			= models.ForeignKey(
+						Book, 
+						on_delete=models.CASCADE, 
+						default=None, 
+						related_name="opinions"
+					)
 
 	def __str__(self):
 		return f"{self.book.ISBN}- {self.rating}"		
